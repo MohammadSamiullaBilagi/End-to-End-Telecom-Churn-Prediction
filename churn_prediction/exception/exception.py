@@ -3,9 +3,11 @@ from churn_prediction.logging import logger
 
 class TelecomChurnException(Exception):
     def __init__(self, error_message,error_details:sys):
+        #stores provided error message as instance variable
         self.error_message=error_message
         _,_,exc_tb=error_details.exc_info()
 
+        #stores the exact line no where exception occured
         self.lineno=exc_tb.tb_lineno
         self.file_name=exc_tb.tb_frame.f_code.co_filename
     
