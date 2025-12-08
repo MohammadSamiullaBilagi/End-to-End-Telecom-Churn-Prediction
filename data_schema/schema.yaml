@@ -1,0 +1,47 @@
+schema:
+  columns:
+    gender: int64
+    SeniorCitizen: int64
+    Partner: int64
+    Dependents: int64
+    tenure: int64
+    PhoneService: int64
+    MultipleLines: object
+    InternetService: object
+    OnlineSecurity: object
+    OnlineBackup: object
+    DeviceProtection: object
+    TechSupport: object
+    StreamingTV: object
+    StreamingMovies: object
+    Contract: object
+    PaperlessBilling: int64
+    PaymentMethod: object
+    MonthlyCharges: float64
+    TotalCharges: float64
+    Churn: int64
+
+  numerical_columns:
+    - gender
+    - SeniorCitizen
+    - Partner
+    - Dependents
+    - tenure
+    - PhoneService
+    - PaperlessBilling
+    - MonthlyCharges
+    - TotalCharges
+
+  categorical_columns:
+    - MultipleLines
+    - InternetService
+    - OnlineSecurity
+    - OnlineBackup
+    - DeviceProtection
+    - TechSupport
+    - StreamingTV
+    - StreamingMovies
+    - Contract
+    - PaymentMethod
+
+  # target_column: Churn
