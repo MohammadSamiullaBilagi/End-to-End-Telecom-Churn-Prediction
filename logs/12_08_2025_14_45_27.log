@@ -1,0 +1,8 @@
+[2025-12-08 14:45:41,862] 14 root - INFO - Initiate DataIngestion
+[2025-12-08 14:45:44,504] 139 root - INFO - Read 7043 records from Samiulla_Churn.TelecomChurn
+[2025-12-08 14:45:44,566] 161 root - INFO - Feature store saved at: Artifacts\12_08_2025_14_45_32\data_ingestion\feature_store\Churn_prediction_cleaned.csv
+[2025-12-08 14:45:44,574] 175 root - INFO - Performing Train/Test split of dataframe
+[2025-12-08 14:45:44,574] 176 root - INFO - Exited split_data_as_train_test method of DataIngestion class
+[2025-12-08 14:45:44,641] 195 root - INFO - Exported train file to: Artifacts\12_08_2025_14_45_32\data_ingestion\ingested\train.csv
+[2025-12-08 14:45:44,642] 196 root - INFO - Exported test file to: Artifacts\12_08_2025_14_45_32\data_ingestion\ingested\test.csv
+[2025-12-08 14:45:44,643] 220 root - INFO - DataIngestionArtifact: DataIngestionArtifact(trained_file_path='Artifacts\\12_08_2025_14_45_32\\data_ingestion\\ingested\\train.csv', test_file_path='Artifacts\\12_08_2025_14_45_32\\data_ingestion\\ingested\\test.csv')

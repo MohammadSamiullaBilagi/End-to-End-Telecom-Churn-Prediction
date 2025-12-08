@@ -43,12 +43,14 @@ class TelecomChurnDataExtract():
             self.records=records
             self.database=database
             self.collection=collection
-
+            
+            # here i used pymongo.mongoclient() instead of MongoClient()
             self.mongo_client=pymongo.MongoClient(MONGO_DB_URL,tlsCAFile=ca)
 
             self.database=self.mongo_client[self.database]
             self.collection=self.database[collection]
 
+            #got error here, as i did insert_many=(self.records)
             self.collection.insert_many(self.records)
 
             return (len(self.records))
