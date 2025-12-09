@@ -1,9 +1,10 @@
 from churn_prediction.components.data_ingestion import DataIngestion
 from churn_prediction.exception.exception import TelecomChurnException
 from churn_prediction.logging.logger import logging
-from churn_prediction.entity.config_entity import DataIngestionConfig,DataValidationConfig
+from churn_prediction.entity.config_entity import DataIngestionConfig,DataValidationConfig,DataTransformationConfig
 from churn_prediction.entity.config_entity import TrainingPipelineConfig
 from churn_prediction.components.data_validation import DataValidation
+from churn_prediction.components.data_transformation import DataTransformation
 import sys
 import os
 
@@ -22,6 +23,12 @@ if __name__=="__main__":
         data_validation_artifact=data_validation.initiate_data_validation()
         logging.info("Data validation completed")
         print(data_validation_artifact)
+        data_transformation_config=DataTransformationConfig(trainingpipelineconfig)
+        data_transformation=DataTransformation(data_validation_artifact,data_transformation_config)
+        logging.info("Data Transformation Initiated")
+        data_transformation_artifact=data_transformation.initiate_data_transformation()
+        logging.info("Data Transformation Completed")
+        print(data_transformation_artifact)
     except Exception as e:
         raise TelecomChurnException(e,sys)
 

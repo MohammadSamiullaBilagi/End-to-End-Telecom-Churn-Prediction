@@ -3,6 +3,7 @@ import os
 from churn_prediction.constant import training_pipeline
 from churn_prediction.exception.exception import TelecomChurnException
 from churn_prediction.logging.logger import logging
+from churn_prediction.constant.training_pipeline import PREPROCESSING_OBJECT_FILE_NAME
 
 print(training_pipeline.PIPELINE_NAME)
 print(training_pipeline.ARTIFACT_DIR)
@@ -81,4 +82,14 @@ class DataValidationConfig:
         )
 
 
+class DataTransformationConfig:
+    def __init__(self,training_pipeline_config:TrainingPipelineConfig):
 
+        self.data_transformation_dir:str=os.path.join(training_pipeline_config.artifact_dir,training_pipeline.DATA_TRANSFORMATION_DIR)
+        self.data_transformation_train_file_path:str=os.path.join(self.data_transformation_dir,training_pipeline.DATA_TRANSFORMATION_TRANSFORMED_DATA_DIR,
+                                                                  training_pipeline.TRAIN_FILE_NAME.replace("csv","npy"),)
+        self.data_transformation_test_file_path:str=os.path.join(self.data_transformation_dir,training_pipeline.DATA_TRANSFORMATION_TRANSFORMED_DATA_DIR,
+                                                                 training_pipeline.TEST_FILE_NAME.replace("csv","npy"),)
+        
+        self.data_transformation_object_file_path:str=os.path.join(self.data_transformation_dir,training_pipeline.DATA_TRANSFORMATION_TRANSFORMED_OBJECT_DIR,
+                                                                   training_pipeline.PREPROCESSING_OBJECT_FILE_NAME,)

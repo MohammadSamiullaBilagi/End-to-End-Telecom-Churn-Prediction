@@ -35,7 +35,7 @@ class DataValidation:
     def validate_number_of_columns(self,dataframe:pd.DataFrame)->bool:
         try:
             #read from schema
-            number_of_cols=len(self._schema_config)
+            number_of_cols=number_of_cols = len(self._schema_config["schema"]["columns"])
             logging.info(f"Required number of columns : {number_of_cols}")
             logging.info(f"Datafram has columns: {len(dataframe.columns)}")
 
@@ -48,7 +48,7 @@ class DataValidation:
     
     def validate_numerical_columns(self, dataframe: pd.DataFrame) -> bool:
         try:
-            required_numerical_cols = self._schema_config.get("numerical_columns", [])
+            required_numerical_cols = self._schema_config["schema"]["numerical_columns"]
             logging.info(f"Required numerical columns: {required_numerical_cols}")
 
             missing_cols = [col for col in required_numerical_cols if col not in dataframe.columns]
@@ -64,7 +64,7 @@ class DataValidation:
     
     def validate_categorical_columns(self, dataframe: pd.DataFrame) -> bool:
         try:
-            required_categorical_cols = self._schema_config.get("categorical_columns", [])
+            required_categorical_cols = self._schema_config["schema"]["categorical_columns"]
             logging.info(f"Required categorical columns: {required_categorical_cols}")
 
             missing_cols = [col for col in required_categorical_cols if col not in dataframe.columns]
