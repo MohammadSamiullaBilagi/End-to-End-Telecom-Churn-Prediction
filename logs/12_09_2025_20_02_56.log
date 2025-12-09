@@ -1,0 +1,31 @@
+[2025-12-09 20:03:02,956] 17 root - INFO - Initiate DataIngestion
+[2025-12-09 20:03:05,536] 50 root - INFO - Read 7043 records from Samiulla_Churn.TelecomChurn
+[2025-12-09 20:03:05,725] 72 root - INFO - Feature store saved at: Artifacts\12_09_2025_20_02_58\data_ingestion\feature_store\Churn_prediction_cleaned.csv
+[2025-12-09 20:03:05,730] 86 root - INFO - Performing Train/Test split of dataframe
+[2025-12-09 20:03:05,730] 87 root - INFO - Exited split_data_as_train_test method of DataIngestion class
+[2025-12-09 20:03:05,835] 106 root - INFO - Exported train file to: Artifacts\12_09_2025_20_02_58\data_ingestion\ingested\train.csv
+[2025-12-09 20:03:05,836] 107 root - INFO - Exported test file to: Artifacts\12_09_2025_20_02_58\data_ingestion\ingested\test.csv
+[2025-12-09 20:03:05,838] 131 root - INFO - DataIngestionArtifact: DataIngestionArtifact(trained_file_path='Artifacts\\12_09_2025_20_02_58\\data_ingestion\\ingested\\train.csv', test_file_path='Artifacts\\12_09_2025_20_02_58\\data_ingestion\\ingested\\test.csv')
+[2025-12-09 20:03:05,845] 20 root - INFO - Data Inititation Completed
+[2025-12-09 20:03:05,852] 23 root - INFO - Initiate Data validation
+[2025-12-09 20:03:05,997] 39 root - INFO - Required number of columns : 20
+[2025-12-09 20:03:05,997] 40 root - INFO - Datafram has columns: 20
+[2025-12-09 20:03:05,997] 39 root - INFO - Required number of columns : 20
+[2025-12-09 20:03:05,997] 40 root - INFO - Datafram has columns: 20
+[2025-12-09 20:03:05,998] 52 root - INFO - Required numerical columns: ['gender', 'SeniorCitizen', 'Partner', 'Dependents', 'tenure', 'PhoneService', 'PaperlessBilling', 'MonthlyCharges', 'TotalCharges']
+[2025-12-09 20:03:05,998] 52 root - INFO - Required numerical columns: ['gender', 'SeniorCitizen', 'Partner', 'Dependents', 'tenure', 'PhoneService', 'PaperlessBilling', 'MonthlyCharges', 'TotalCharges']
+[2025-12-09 20:03:05,998] 68 root - INFO - Required categorical columns: ['MultipleLines', 'InternetService', 'OnlineSecurity', 'OnlineBackup', 'DeviceProtection', 'TechSupport', 'StreamingTV', 'StreamingMovies', 'Contract', 'PaymentMethod']
+[2025-12-09 20:03:05,998] 68 root - INFO - Required categorical columns: ['MultipleLines', 'InternetService', 'OnlineSecurity', 'OnlineBackup', 'DeviceProtection', 'TechSupport', 'StreamingTV', 'StreamingMovies', 'Contract', 'PaymentMethod']
+[2025-12-09 20:03:06,446] 25 root - INFO - Data validation completed
+[2025-12-09 20:03:06,447] 29 root - INFO - Data Transformation Initiated
+[2025-12-09 20:03:06,447] 69 root - INFO - Entered data transformation method of DataTransformation class
+[2025-12-09 20:03:06,447] 71 root - INFO - Starting data transformation
+[2025-12-09 20:03:06,496] 86 root - INFO - Numerical columns: ['gender', 'SeniorCitizen', 'Partner', 'Dependents', 'tenure', 'PhoneService', 'PaperlessBilling', 'MonthlyCharges', 'TotalCharges']
+[2025-12-09 20:03:06,496] 87 root - INFO - Categorical columns: ['MultipleLines', 'InternetService', 'OnlineSecurity', 'OnlineBackup', 'DeviceProtection', 'TechSupport', 'StreamingTV', 'StreamingMovies', 'Contract', 'PaymentMethod']
+[2025-12-09 20:03:06,496] 62 root - INFO - Built ColumnTransformer with 9 numeric and 10 categorical cols
+[2025-12-09 20:03:06,632] 52 root - INFO - Entered save object method of MainUtils class
+[2025-12-09 20:03:06,635] 56 root - INFO - Exited the save_object method of MainUtils class
+[2025-12-09 20:03:06,635] 52 root - INFO - Entered save object method of MainUtils class
+[2025-12-09 20:03:06,636] 56 root - INFO - Exited the save_object method of MainUtils class
+[2025-12-09 20:03:06,639] 31 root - INFO - Data Transformation Completed
+[2025-12-09 20:03:06,640] 34 root - INFO - Model Training started
