@@ -26,6 +26,7 @@ class ClassificationMetricArtifact:
     f1_score:float
     precision_score:float
     recall_score:float
+    auc_score: float | None = None
 
 @dataclass
 class ModelTrainerArtifact:

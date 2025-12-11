@@ -8,6 +8,7 @@ from churn_prediction.utils.main_utils.utils import load_numpy_array_data,evalua
 from churn_prediction.utils.ml_utils.metric.classification_metric import get_classification_score
 from churn_prediction.utils.ml_utils.model.estimator import TelecomChurnModel
 import os,sys
+import mlflow
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import r2_score
@@ -19,6 +20,15 @@ from sklearn.ensemble import(
     RandomForestClassifier,
 )
 
+# got error here because of the package installed was of higher version
+# hence fixed by using pip install "mlflow>=2.10,<3"
+# also the token is in the dagshub token folder in e drive
+import dagshub
+dagshub.init(repo_owner='MohammadSamiullaBilagi', repo_name='End-to-End-Telecom-Churn-Prediction', mlflow=True)
+
+mlflow.set_tracking_uri(
+    "https://dagshub.com/MohammadSamiullaBilagi/End-to-End-Telecom-Churn-Prediction.mlflow"
+)
 class ModelTrainer:
     def __init__(self,model_trainer_config:ModelTrainerConfig,data_transformation_artifact:DataTransformationArtifact):
         try:
@@ -27,6 +37,23 @@ class ModelTrainer:
 
         except Exception as e:
             raise TelecomChurnException(e,sys)
+    
+    def track_mlflow(self,best_model,classificationmetric):
+        with mlflow.start_run():
+            f1_score=classificationmetric.f1_score
+            precision_score=classificationmetric.precision_score
+            recall_score=classificationmetric.recall_score
+            train_auc=classificationmetric.auc_score
+            test_auc=classificationmetric.auc_score
+
+            mlflow.log_metric("f1_score",f1_score)
+            mlflow.log_metric("precision",precision_score)
+            mlflow.log_metric("recall_score",recall_score)
+            mlflow.log_metric("train_auc", train_auc)
+            mlflow.log_metric("test_auc", test_auc)
+            mlflow.sklearn.log_model(best_model,"best_model")
+
+
     
     def train_model(self,x_train,y_train,x_test,y_test):
         models={
@@ -114,9 +141,17 @@ class ModelTrainer:
         y_train_pred = best_model.predict(x_train)
         y_test_pred = best_model.predict(x_test)
 
+        y_train_proba = best_model.predict_proba(x_train)[:, 1]
+        y_test_proba = best_model.predict_proba(x_test)[:, 1]
 
-        classification_train_metric=get_classification_score(y_true=y_train,y_pred=y_train_pred)
-        classification_test_metric=get_classification_score(y_true=y_test,y_pred=y_test_pred)
+
+        classification_train_metric=get_classification_score(y_true=y_train,y_pred=y_train_pred,y_proba=y_train_proba)
+        # Track experiments mlflow
+        self.track_mlflow(best_model,classification_train_metric)
+        classification_test_metric=get_classification_score(y_true=y_test,y_pred=y_test_pred,y_proba=y_test_proba)
+        self.track_mlflow(best_model,classification_test_metric)
+
+        
 
         print(f"Train F1: {classification_train_metric.f1_score:.4f}")
         print(f"Test F1: {classification_test_metric.f1_score:.4f}")
@@ -130,6 +165,9 @@ class ModelTrainer:
         Telecom_churn_model=TelecomChurnModel(preprocessor=preprocessor,model=best_model)
 
         save_object(self.model_trainer_config.trained_model_file_path,obj=Telecom_churn_model)
+
+        # model pusher locally
+        save_object("final_model/model.pkl",best_model)
 
         ## Model Trainer Artifact
         model_trainer_artifact=ModelTrainerArtifact(trained_model_file_path=self.model_trainer_config.trained_model_file_path,
@@ -163,6 +201,7 @@ class ModelTrainer:
             
         except Exception as e:
             raise TelecomChurnException(e,sys)
+
 
 
 

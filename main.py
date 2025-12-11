@@ -9,6 +9,9 @@ from churn_prediction.components.model_trainer import ModelTrainer
 import sys
 import os
 
+import os
+os.environ["DAGSHUB_TOKEN"] = "your_token_here"
+
 if __name__=="__main__":
     try:
         trainingpipelineconfig=TrainingPipelineConfig()

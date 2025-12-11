@@ -106,7 +106,7 @@ class DataTransformation:
             save_object(self.data_transformation_config.data_transformation_object_file_path, preprocessor_obj)
 
             # Also save a copy for model serving if desired
-            save_object("final_models/preprocessor.pkl", preprocessor_obj)
+            save_object("final_model/preprocessor.pkl", preprocessor_obj)
 
             # Prepare artifact (note: fixed the swapped path bug)
             data_transformation_artifact = DataTransformationArtifact(
