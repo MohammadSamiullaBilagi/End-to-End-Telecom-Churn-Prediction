@@ -47,7 +47,7 @@ jobs:
       - name: Login to Amazon ECR Public
         id: login-ecr-public
         env:
-          ECR_REGISTRY: ${{ secrets.AWS_ECR_LOGIN_URI }}   # public.ecr.aws/n1u2v8x8
+          ECR_REGISTRY: ${{ secrets.AWS_ECR_LOGIN_URI }}   
         run: |
           aws ecr-public get-login-password --region us-east-1 \
             | docker login --username AWS --password-stdin "$ECR_REGISTRY"
